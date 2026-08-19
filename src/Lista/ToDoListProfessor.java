@@ -1,10 +1,10 @@
 package Lista;
 import java.util.Scanner;
-public class Tarefas {
+public class ToDoListProfessor {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] atividades = new String[10];
-        boolean[] prontas = new boolean[10];
+        String[] tarefas = new String[10];
+        boolean[] concluidas = new boolean[10];
         int num = 0;
         while (num != 5) {
             System.out.println("\n-----Lista de tarefas-----");
@@ -20,8 +20,8 @@ public class Tarefas {
                 case 1:
                     System.out.println("Opção escolhida: Adicionar tarefa.");
                     int banana1 = -1;                   
-                    for (int i = 0; i < atividades.length; i++) {
-                        if (atividades[i] == null) {
+                    for (int i = 0; i < tarefas.length; i++) {
+                        if (tarefas[i] == null) {
                             banana1 = i;
                             break;
                         }
@@ -30,21 +30,21 @@ public class Tarefas {
                         System.out.println("A lista de tarefas está cheia!");
                     } else {
                         System.out.print("Digite a tarefa: ");
-                        atividades[banana1] = scanner.nextLine();
+                        tarefas[banana1] = scanner.nextLine();
                         System.out.println("Tarefa adicionada com sucesso!");
                     }
                     break;
                 case 2:
                     System.out.println("\nOpção escolhida: Listar tarefas.");
-                    boolean temTarefa = false;                   
-                    for (int i = 0; i < atividades.length; i++) {
-                        if (atividades[i] != null) {
-                            temTarefa = true;
-                            String status = prontas[i] ? "[X]" : "[]";
-                            System.out.println(i + " - " + atividades[i] + " " + status);
+                    boolean existetarefa = false;                   
+                    for (int i = 0; i < tarefas.length; i++) {
+                        if (tarefas[i] != null) {
+                            existetarefa = true;
+                            String status = concluidas[i] ? "[X]" : "[]";
+                            System.out.println(i + " - " + tarefas[i] + " " + status);
                         }
                     }                    
-                    if (!temTarefa) {System.out.println("Nenhuma tarefa cadastrada no momento.");
+                    if (!existetarefa) {System.out.println("Nenhuma tarefa cadastrada no momento.");
                     }
                     break;
                 case 3:
@@ -52,9 +52,9 @@ public class Tarefas {
                     System.out.print("Digite o número da tarefa que deseja concluir: ");
                     int indiceConcluir = scanner.nextInt();
                     scanner.nextLine();
-                    if (indiceConcluir >= 0 && indiceConcluir < atividades.length && atividades[indiceConcluir] != null) {
-                        prontas[indiceConcluir] = true;
-                        System.out.println("Tarefa \"" + atividades[indiceConcluir] + "\" marcada como concluída!");
+                    if (indiceConcluir >= 0 && indiceConcluir < tarefas.length && tarefas[indiceConcluir] != null) {
+                        concluidas[indiceConcluir] = true;
+                        System.out.println("Tarefa concluida com sucesso");
                     } else {
                         System.out.println("Número de tarefa inválido!");
                     }
