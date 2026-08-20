@@ -50,11 +50,11 @@ public class Tarefas {
                 case 3:
                     System.out.println("\nOpção escolhida: Concluir tarefa.");
                     System.out.print("Digite o número da tarefa que deseja concluir: ");
-                    int indiceConcluir = scanner.nextInt();
+                    int Concluir = scanner.nextInt();
                     scanner.nextLine();
-                    if (indiceConcluir >= 0 && indiceConcluir < atividades.length && atividades[indiceConcluir] != null) {
-                        prontas[indiceConcluir] = true;
-                        System.out.println("Tarefa \"" + atividades[indiceConcluir] + "\" marcada como concluída!");
+                    if (Concluir >= 0 && Concluir < atividades.length && atividades[Concluir] != null) {
+                        prontas[Concluir] = true;
+                        System.out.println("Tarefa \"" + atividades[Concluir] + "\" marcada como concluída!");
                     } else {
                         System.out.println("Número de tarefa inválido!");
                     }
