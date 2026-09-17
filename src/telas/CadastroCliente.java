@@ -81,6 +81,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabelCPF.setText("CPF:");
 
         jComboBoxCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Campo Mourão", "Curitiba", "Maringa", "Cianorte", "Mambore", "Araruna", " " }));
+        jComboBoxCidade.addActionListener(this::jComboBoxCidadeActionPerformed);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Cidade:");
@@ -193,6 +194,10 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jComboBoxCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCidadeActionPerformed
         
     /**
      * @param args the command line arguments
