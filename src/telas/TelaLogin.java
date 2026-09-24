@@ -113,8 +113,6 @@ public class TelaLogin extends javax.swing.JFrame {
     } else {
         javax.swing.JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.", "Erro de Autenticação", javax.swing.JOptionPane.ERROR_MESSAGE);
     }
-}
-
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**
