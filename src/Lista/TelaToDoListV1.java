@@ -84,11 +84,11 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tarefa", "Status", "Data"
+                "Tarefa", "Status", "Data", "Data Conclusão"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -165,7 +165,7 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextFieldDescricaoTarefa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,6 +222,8 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
         
         salvarTarefa();
         
+        filtrarTabela();
+        
         preencherTabela();
         
         atualizarEstatisticas();
@@ -241,19 +243,25 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
         
         int indiceTarefaSelecionada = tarefas.indexOf(tarefaSelecionada);
         
-        String[] dados = tarefas.get(indiceTarefaSelecionada).split(";");
-        
-        tarefas.set(indiceTarefaSelecionada, dados[0] + ";" + CONCLUIDA + ";" + dados[2]);
-        
+        String[] dados = tarefas.get(indiceTarefaSelecionada) .split(";");
+
+        if (dados[1].equals(CONCLUIDA)){
+            JOptionPane.showMessageDialog(rootPane, "Essa tarefa já foi concluída!");
+            return;
+}
+
+        String dataConclusao = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+        tarefas.set(indiceTarefaSelecionada, dados[0] + ";" + CONCLUIDA + ";" + dados[2] + ";" + dataConclusao);
+
         salvarTarefa();
         
         atualizarEstatisticas();
         
-        retornarTotalConcluidas();
-        
         filtrarTabela();
         
         preencherTabela();
+        
     }//GEN-LAST:event_jButtonConcluirTarefaActionPerformed
 
     private void jComboBoxFiltroStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFiltroStatusItemStateChanged
@@ -300,25 +308,26 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldConcluidasActionPerformed
 
     private void preencherTabela(){
-        ArrayList <String> listaTarefas;
-        
-        if (jComboBoxFiltroStatus.getSelectedIndex() > 0){
-            listaTarefas = tarefasFiltradas;
-        }else{
-            listaTarefas = tarefas;
-        }
-        
-        model.setRowCount(0);
-        
-        for (String tarefa : listaTarefas){
-            String[] dados = tarefa.split(";");
+    ArrayList <String> listaTarefas;
+    
+    if (jComboBoxFiltroStatus.getSelectedIndex() > 0){
+        listaTarefas = tarefasFiltradas;
+    }else{
+        listaTarefas = tarefas;
+    }
+    
+    model.setRowCount(0);
+    
+    for (String tarefa : listaTarefas){
+        String[] dados = dividirTarefa(tarefa);
 
-            model.addRow(new Object[]{
-                dados[0],
-                dados[1],
-                dados[2]
-            });
-        }
+        model.addRow(new Object[]{
+            dados[0],
+            dados[1],
+            dados[2],
+            dados[3]
+        });
+    }
     }
     
     private void filtrarTabela(){
@@ -432,6 +441,15 @@ public class TelaToDoListV1 extends javax.swing.JFrame {
             
         }
     }
+    
+    private String[] dividirTarefa(String tarefa){
+        String[] partes = tarefa.split(";", -1);
+        String[] dados = new String[4];
+        for (int i = 0; i < 4; i++){
+            dados[i] = i < partes.length ? partes[i] : "";
+    }
+        return dados;
+}
     
     /**
      * @param args the command line arguments
